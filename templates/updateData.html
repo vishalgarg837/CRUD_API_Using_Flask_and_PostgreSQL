@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script type="text/javascript">
+			function setData() {	
+				var counts = {{ result|tojson }};
+				/*var counts = JSON.parse("{{ result }}");*/
+				//alert(counts);
+				var selectCtrl = document.getElementById("Id");
+				var selectedItem =  selectCtrl.options[selectCtrl.selectedIndex];
+				//alert(selectedItem.text);
+				var arrayLength = counts.length;
+				//alert(arrayLength);
+				for (var i = 0; i < arrayLength; i++) {
+					//alert(counts[i]);
+					for (var j = 0; j < 1; j++) {
+						//alert(counts[i][j]);
+						var elm0 = parseInt(selectedItem.text);
+						if(counts[i][0] == parseInt(selectedItem.text)) {
+							//alert(counts[i][j]);
+							//document.getElementById('id1').value = counts[i][1];
+							//document.getElementById("t1").setAttribute('value', counts[i][1]);
+							var elm1 = document.getElementById("t1");
+							elm1.value = counts[i][1];
+							var elm2 = document.getElementById("t2");
+							elm2.value = counts[i][2];
+							var elm3 = document.getElementById("t3");
+							elm3.value = counts[i][3];
+							var elm4 = document.getElementById("t4");
+							elm4.value = counts[i][4];
+						}
+					}
+				}
+				return true;
+			}
+			function validateForm(){
+				var stuName = document.forms["addForm"]["Stu_Name"].value;
+				if(stuName == ""){
+					alert("Student Name must be filled out!");
+					return false;
+				} else if (stuName.length > 50) {
+					alert("Length of student name must be less than 50!");
+					return false;
+				}
+				var mobileNum = document.forms["addForm"]["Mob_Number"].value;
+				//var phoneno = /^\d{10}$/;
+				var phoneno = /^[7-9]{1}[0-9]{9}$/;
+				if(mobileNum == ""){
+					alert("Mobile Number must be filled out!");
+					return false;
+				} else if(!mobileNum.match(phoneno)){
+					alert("Not a valid Phone Number");
+					return false;
+				} 
+				var emailId = document.forms["addForm"]["Email_Id"].value;
+				var emailRegExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+				if(emailId == ""){
+					alert("Email-Id must be filled out!");
+					return false;
+				} else if (emailId.length > 50) {
+					alert("Length of Email-Id must be less than 50!");
+					return false;
+				} else if (!emailId.match(emailRegExp)){
+					alert("You have entered an invalid email address!");
+					return false;
+				}
+				return true;
+			}
+		</script>
+	</head>
+	<body>	
+		<p align = "center"><input type = "submit" value = "Load" onclick = "setData()"/></p>	
+		<form align = "center" name = "addForm" action = "http://localhost:5000/update_db_code" onsubmit = "return validateForm()" method = "POST">	
+			<select id = "Id" name = "selectId" >
+				{% for Id, Stu_Name, Mob_Number, Reg_Date, Email_Id in result %}
+					<option>{{Id}}</option>
+					<!--<option value="ID: {{Id}}" align = "center">{{Id}}</option>-->
+				{% endfor %}
+		    </select>
+			<!--{% for row in result %}
+				<option value="Id">{{row["Id"]}}</option>
+			{% endfor %}
+			-->
+			<p>Student Name <input type = "text"  id = "t1" name = "Stu_Name" ></p>
+			<p>Mobile Number <input type ="text"  id = "t2" name = "Mob_Number" ></p>
+			<p>Date <input type ="text" id = "t3" name = "t3" ></p>
+			<p>Email ID <input type = "text" id = "t4" name = "Email_Id" ></p>
+			<p><input type = "submit" value = "submit" /></p>
+		</form>
+	</body>
+</html>
