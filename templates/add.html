@@ -1,0 +1,48 @@
+<html>
+	<head>
+		<script type = "text/javascript">
+			function validateForm(){
+				var stuName = document.forms["addForm"]["Stu_Name"].value;
+				if(stuName == ""){
+					alert("Student Name must be filled out!");
+					return false;
+				} else if (stuName.length > 50) {
+					alert("Length of student name must be less than 50!");
+					return false;
+				}
+				var mobileNum = document.forms["addForm"]["Mob_Number"].value;
+				//var phoneno = /^\d{10}$/;
+				var phoneno = /^[7-9]{1}[0-9]{9}$/;
+				if(mobileNum == ""){
+					alert("Mobile Number must be filled out!");
+					return false;
+				} else if(!mobileNum.match(phoneno)){
+					alert("Not a valid Phone Number");
+					return false;
+				} 
+				var emailId = document.forms["addForm"]["Email_Id"].value;
+				var emailRegExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+				if(emailId == ""){
+					alert("Email-Id must be filled out!");
+					return false;
+				} else if (emailId.length > 50) {
+					alert("Length of Email-Id must be less than 50!");
+					return false;
+				} else if (!emailId.match(emailRegExp)){
+					alert("You have entered an invalid email address!");
+					return false;
+				}
+				return true;
+			}
+		</script>
+	</head>
+    <body>
+       <form  align = "center" name = "addForm" action = "http://localhost:5000/check_add_validation" onsubmit = "return validateForm()" method = "POST">
+          <p>Student Name <input type = "text" name = "Stu_Name" /></p>
+          <p>Mobile Number <input type ="text" name = "Mob_Number" /></p>
+		  <p>Date <input type ="text" name = "date" /></p>
+		  <p>Email ID <input type = "text" name = "Email_Id" /></p>
+          <p><input type = "submit" value = "submit" /></p>
+       </form>
+    </body>
+</html>

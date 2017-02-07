@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script type="text/javascript">
+			function setData() {	
+				var counts = {{ result|tojson }};
+				/*var counts = JSON.parse("{{ result }}");*/
+				//alert(counts);
+				var selectCtrl = document.getElementById("Id");
+				var selectedItem =  selectCtrl.options[selectCtrl.selectedIndex];
+				//alert(selectedItem.text);
+				var arrayLength = counts.length;
+				//alert(arrayLength);
+				for (var i = 0; i < arrayLength; i++) {
+					//alert(counts[i]);
+					for (var j = 0; j < 1; j++) {
+						//alert(counts[i][j]);
+						var elm0 = parseInt(selectedItem.text);
+						if(counts[i][0] == parseInt(selectedItem.text)) {
+							//alert(counts[i][j]);
+							//document.getElementById('id1').value = counts[i][1];
+							//document.getElementById("t1").setAttribute('value', counts[i][1]);
+							var elm1 = document.getElementById("t1");
+							elm1.value = counts[i][1];
+							var elm2 = document.getElementById("t2");
+							elm2.value = counts[i][2];
+							var elm3 = document.getElementById("t3");
+							elm3.value = counts[i][3];
+							var elm4 = document.getElementById("t4");
+							elm4.value = counts[i][4];
+						}
+					}
+				}
+			}
+			
+		</script>
+	</head>
+	<body>	
+		<p align = "center"><input type = "submit" value = "Load" onclick = "setData()"/></p>	
+		<form action = "http://localhost:5000/delete_db_code" method = "POST"  align = "center">	
+			<select id = "Id" name = "selectId" >
+				{% for Id, Stu_Name, Mob_Number, Reg_Date, Email_Id in result %}
+					<option>{{Id}}</option>
+					<!--<option value="ID: {{Id}}" align = "center">{{Id}}</option>-->
+				{% endfor %}
+		    </select>
+			<!--{% for row in result %}
+				<option value="Id">{{row["Id"]}}</option>
+			{% endfor %}
+			-->
+			<p>Student Name <input type = "text"  id = "t1" name = "t1" readonly></p>
+			<p>Mobile Number <input type ="text"  id = "t2" name = "t2" readonly></p>
+			<p>Date <input type ="text" id = "t3" name = "t3" readonly></p>
+			<p>Email ID <input type = "text" id = "t4" name = "t4" readonly></p>
+			<p><input type = "submit" value = "Delete" /></p>
+		</form>
+	</body>
+</html>

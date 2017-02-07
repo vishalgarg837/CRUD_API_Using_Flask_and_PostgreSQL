@@ -1,0 +1,24 @@
+<html>
+   <body>
+   
+      <table border = 1  align = "center">
+		  <tr>
+               <th> ID </th>
+               <th> Student Name </th>
+			   <th> Mobile Number </th>
+               <th> Date </th>
+			   <th> Email Id </th>
+          </tr> 
+         {% for Id, Stu_Name, Mob_Number, Reg_Date, Email_Id in result %}         
+            <tr>
+               <th> {{ Id }} </th>
+               <td> {{ Stu_Name }} </td>
+			   <td> {{ Mob_Number }} </td>
+               <td> {{ Reg_Date }} </td>
+			   <td> {{ Email_Id }} </td>
+            </tr>            
+         {% endfor %}
+      </table>
+      
+   </body>
+</html>
