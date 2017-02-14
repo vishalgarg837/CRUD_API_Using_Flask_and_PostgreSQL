@@ -5,6 +5,7 @@ import sys
 
  
 app = Flask(__name__)
+myConn = None
 
 try:
     myConn = psycopg2.connect(database = "python_crud_test", user = "postgres", password = "12345")   
