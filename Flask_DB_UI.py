@@ -42,7 +42,9 @@ def add_get():
         data = (stuName, mobNumber, regDate, emailId)
         cur.execute(query, data)
         myConn.commit()
-    return jsonify({ "message" : "Data Added Successfully!"})
+        return jsonify({ "message" : "Data Added Successfully!"})
+    else:
+        return jsonify({ "message" : "Data not added!"})        
 
 @app.route('/fetch')
 def fetch():
