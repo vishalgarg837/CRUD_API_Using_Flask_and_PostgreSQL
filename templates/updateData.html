@@ -59,7 +59,7 @@
 					return false;
 				} else if (emailId.length > 50) {
 					alert("Length of Email-Id must be less than 50!");
-					return false;
+				return false;
 				} else if (!emailId.match(emailRegExp)){
 					alert("You have entered an invalid email address!");
 					return false;
@@ -69,8 +69,8 @@
 		</script>
 	</head>
 	<body>	
-		<p align = "center"><input type = "submit" value = "Load" onclick = "setData()"/></p>	
-		<form align = "center" name = "addForm" action = "http://localhost:5000/update_db_code" onsubmit = "return validateForm()" method = "POST">	
+		<p align = "center"><input type = "submit" value = "Load" onclick = "setData()"/></p>
+		<form align = "center" name="addForm" action="{{url_for('update_data')}}" onsubmit = "return validateForm()" method = "POST">
 			<select id = "Id" name = "selectId" >
 				{% for Id, Stu_Name, Mob_Number, Reg_Date, Email_Id in result %}
 					<option>{{Id}}</option>

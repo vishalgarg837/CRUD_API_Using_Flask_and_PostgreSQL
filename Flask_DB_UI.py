@@ -8,7 +8,7 @@ app = Flask(__name__)
 myConn = None
 
 try:
-    myConn = psycopg2.connect(database = "python_crud_test", user = "postgres", password = "12345")   
+    myConn = psycopg2.connect(database = "python_crud_test", user = "postgres")   
     cur = myConn.cursor()
 except psycopg2.DatabaseError, e:
     print "I am unable to connect to the database."
@@ -109,4 +109,4 @@ def delete_data():
         return jsonify({ "message" : "Data not deleted!"})   
 
 if __name__=='__main__':
-    app.run(debug=True)
+    app.run(debug=True, host = "0.0.0.0", port = 5000)

@@ -37,7 +37,7 @@
 		</script>
 	</head>
     <body>
-       <form  align = "center" name = "addForm" action = "http://localhost:5000/check_add_validation" onsubmit = "return validateForm()" method = "POST">
+       <form  align = "center" name = "addForm" action = "{{url_for('add_get')}}" onsubmit = "return validateForm()" method = "POST">
           <p>Student Name <input type = "text" name = "Stu_Name" /></p>
           <p>Mobile Number <input type ="text" name = "Mob_Number" /></p>
 		  <p>Date <input type ="text" name = "date" /></p>
